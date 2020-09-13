@@ -26,6 +26,7 @@ class Employee_model extends CI_model
 				'phone_no' => $_POST['phone_no'],
 				'dob' => date("Y-m-d",strtotime($_POST['dob'])) ,
 				'emp_image' => isset($_FILES['userfile']['name']) ? $_FILES['userfile']['name']: $_POST['userfile_hidden'],
+				'status' => 1,
 			);
 			if ($_POST['emp_id']!='') {
 				$this->db->where('emp_id',$_POST['emp_id']);
