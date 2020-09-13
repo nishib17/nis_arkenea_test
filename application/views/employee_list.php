@@ -10,8 +10,7 @@
 	<script src="<?php echo base_url('https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'); ?>"></script>
 	<script src="<?php echo base_url('https://getbootstrap.com/dist/js/bootstrap.min.js'); ?>"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	
 	<link rel="stylesheet" href=" https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" />
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -25,7 +24,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h3>Employee List</h3>
-				<a  href="<?php echo site_url('employee/insert') ?>" style="margin-left: 90%;"><button class="btn btn-primary" >Add</button></a>
+				<a  href="<?php echo site_url('employee/insert') ?>" style="margin-left: 95%;"><button class="btn btn-info" ><i class="fa fa-plus"></i> Add</button></a>
 			<?php
 			if ($this->session->flashdata('success')) {?>
 				<p style="font-size: 18px; color: green;"><?php echo $this->session->flashdata('success'); ?></p>
@@ -44,8 +43,8 @@
 								<th>Employee Id</th>
 								<th>Employee Name</th>
 								<th>Employee Address</th>
-								<th>Email Id</th>
-								<th>Phone No.</th>
+								<th>Email Address</th>
+								<th>Phone </th>
 								<th>DOB</th>
 								<th>Employee Image</th>
 								<th>Edit</th>

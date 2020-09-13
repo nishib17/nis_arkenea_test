@@ -25,18 +25,22 @@ class Employee extends CI_Controller {
 		$config['upload_path'] = "./uploads/";
 		$config['allowed_types'] = "jpg|png";
 		// $config['']
-		$this->load->library('upload',$config);
-		if (! $this->upload->do_upload('userfile')) {
-			
-			$error = array('error' =>  $this->upload->display_errors());
-			$this->load->view('insert',$error);
-			
-		}else{
-			
-			$data = array('upload_data' => $this->upload->data());
-			$this->employee_model->insert_data();
-			redirect('employee');
+		if (isset($_FILES)) {
+			$this->load->library('upload',$config);
+			if (! $this->upload->do_upload('userfile')) {
+				
+				$error = array('error' =>  $this->upload->display_errors());
+				$this->load->view('insert',$error);
+				
+			}else{
+				
+				$data = array('upload_data' => $this->upload->data());
+				
+			}
 		}
+		$this->employee_model->insert_data();
+		redirect('employee');
+		
 	}
 	public function edit($emp_id='')
 	{

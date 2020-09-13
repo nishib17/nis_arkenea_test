@@ -62,8 +62,8 @@ $( function() {
 				<p style="font-size: 18px; color: green;"><?php echo $this->session->flashdata('error'); ?></p>
 			<?php }
 			?>
-			<form method="POST" action="<?=base_url()?>employee/save" enctype="multipart/form-data">
-				<?php echo validation_errors(); ?>
+			<?php echo validation_errors(); ?>
+			<?php echo form_open_multipart('employee/save',['name'=>'insertdata','autocomplete'=>'off']);?>
 				<div class="row">
 					<div class="col-md-4"><b>Employee Name</b>
 						<?php echo form_input(['name'=>'emp_name','class'=>'form-control','value'=>set_value('emp_name')]); ?>
@@ -84,7 +84,7 @@ $( function() {
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4"><b>Phone No</b>
+					<div class="col-md-4"><b>Phone</b>
 						<?php echo form_input(['name'=>'phone_no','class'=>'form-control','value'=>set_value('phone_no')]); ?>
 						<?php echo form_error('phone_no',"<div style='color:red'>","</div>"); ?>
 					</div>
@@ -96,18 +96,22 @@ $( function() {
 				</div>
 				<div class="row">
 					<div class="col-md-4"><b>Employee image</b>
-						 <input name="userfile" type="file" required="" />                   
+						 <input name="userfile" type="file" />                   
 
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
-						<?php echo form_submit(['name'=>'insert','value'=>'Submit']); ?>
+					<div class="col-md-4" style="margin-top: 3%">
+						<?php echo form_submit(['name'=>'insert','value'=>'Submit','class'=>'btn btn-primary']); ?>
+
+						 <a href="<?php echo base_url(); ?>" name="Cancel" class="btn  btn-warning "><i class="fa fa-angle-left"></i> Cancel</a>
 					</div>
+					
+					
 				</div>
 
 				
-			</form>
+			<?php echo form_close();?> 
 						
 
 

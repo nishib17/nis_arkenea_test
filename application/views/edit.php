@@ -9,14 +9,10 @@
 	<script src="<?php echo base_url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js'); ?>"></script>
 	<script src="<?php echo base_url('https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'); ?>"></script>
 	<script src="<?php echo base_url('https://getbootstrap.com/dist/js/bootstrap.min.js'); ?>"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<link rel="stylesheet" href=" https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css" />
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+	
+	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -54,14 +50,15 @@ $( function() {
 			<?php
 			if ($this->session->flashdata('success')) {?>
 				<p style="font-size: 18px; color: green;"><?php echo $this->session->flashdata('success'); ?></p>
-			<?php}
+			<?php }
 			?>
 			<?php
 			if ($this->session->flashdata('error')) {?>
 				<p style="font-size: 18px; color: green;"><?php echo $this->session->flashdata('error'); ?></p>
-			<?php}
+			<?php }
 			?>
-			<form method="POST" action="<?=base_url()?>employee/save" enctype="multipart/form-data">
+			<?php echo form_open_multipart('employee/save',['name'=>'insertdata','autocomplete'=>'off']);?>
+			<!-- <form method="POST" action="<?=base_url()?>employee/save" enctype="multipart/form-data"> -->
 				<div class="row">
 					<div class="col-md-4"><b>Employee Name</b>
 						<input type="hidden" name="emp_id" value="<?php if(isset($result)) echo $result->emp_id ?>">
@@ -82,7 +79,7 @@ $( function() {
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4"><b>Phone No</b>
+					<div class="col-md-4"><b>Phone</b>
 						<?php echo form_input(['name'=>'phone_no','class'=>'form-control','value'=>set_value('phone_no',$result->phone_no)]); ?>
 					</div>
 				</div>
@@ -95,18 +92,21 @@ $( function() {
 					<div class="col-md-4"><b>Employee image</b>
 						 <img src="<?php echo base_url(); ?>uploads/<?=$result->emp_image?>" width="50px" height="50px">                   
 						 <br>
-						 <input name="userfile" type="file" required="" />
+						 <input name="userfile" type="file"  />
+						 <input name="userfile_hidden" type="hidden" value="<?php if(isset($result)) echo $result->emp_image ?>" />
 
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4" style="margin-top: 20px">
-						<?php echo form_submit(['name'=>'insert','value'=>'Submit']); ?>
+					<div class="col-md-4" style="margin-top: 3%">
+						<?php echo form_submit(['name'=>'insert','value'=>'Submit','class'=>'btn btn-primary']); ?>
+
+						 <a href="<?php echo base_url(); ?>" name="Cancel" class="btn  btn-warning "><i class="fa fa-angle-left"></i> Cancel</a>
 					</div>
 				</div>
 
 				
-			</form>
+			<?php echo form_close();?> 
 						
 
 

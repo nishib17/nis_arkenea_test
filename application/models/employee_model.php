@@ -1,7 +1,4 @@
 <?php
-/**
- * 
- */
 class Employee_model extends CI_model
 {
 	
@@ -12,9 +9,10 @@ class Employee_model extends CI_model
 	}
 	public function insert_data()
 	{
+
 		$this->form_validation->set_rules('emp_name','Employee Name','alpha');
 		// $this->form_validation->set_rules('email_address','Email Address','valid_email');
-		$this->form_validation->set_rules('email_address', 'Email Address', 'trim|valid_email');
+		$this->form_validation->set_rules('email_address', 'Email Address', 'trim|valid_email|is_unique[employee.email_address]');
 		$this->form_validation->set_rules('phone_no','Phone No','numeric|exact_length[10]');
 		if ($this->form_validation->run()) {
 			$data = array(
@@ -23,25 +21,29 @@ class Employee_model extends CI_model
 				'email_address' => $_POST['email_address'],
 				'phone_no' => $_POST['phone_no'],
 				'dob' => date("Y-m-d",strtotime($_POST['dob'])) ,
-				'emp_image' => $_FILES['userfile']['name'],
+				'emp_image' => isset($_FILES['userfile']['name']) ? $_FILES['userfile']['name']: $_POST['userfile_hidden'],
 			);
 			if ($_POST['emp_id']!='') {
 				$this->db->where('emp_id',$_POST['emp_id']);
-				$this->db->update('employee',$data);
+				$query_update = $this->db->update('employee',$data);
 			}else{
 
-				$query = $this->db->insert('employee',$data);
+				$query_add = $this->db->insert('employee',$data);
 			}
-			if ($query) {
-				$this->session->set_flashdata('success','Employee added.');
+			if ($query_add) {
+				$this->session->set_flashdata('success','Employee details added.');
+				redirect('employee');
+			}else if ($query_update) {
+				$this->session->set_flashdata('success','Employee details Updated.');
 				redirect('employee');
 			}else{
-				$this->session->set_flashdata('error','Something went wrong.');
+				$this->session->set_flashdata('error', 'Somthing went wrong. Try again with valid details !!');
 				redirect('employee/insert');
 			}
 
 			
 		}else{
+			$this->session->set_flashdata('error', 'Somthing went wrong. Try again with valid details !!');
 			redirect('employee/insert');
 		}
 	}
