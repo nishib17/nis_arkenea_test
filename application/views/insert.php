@@ -62,7 +62,10 @@ $( function() {
 				<p style="font-size: 18px; color: green;"><?php echo $this->session->flashdata('error'); ?></p>
 			<?php }
 			?>
-			<?php echo validation_errors(); ?>
+			<?php echo validation_errors();
+			$this->session->set_flashdata('errors', validation_errors());
+			 ?>
+
 			<?php echo form_open_multipart('employee/save',['name'=>'insertdata','autocomplete'=>'off']);?>
 				<div class="row">
 					<div class="col-md-4"><b>Employee Name</b>

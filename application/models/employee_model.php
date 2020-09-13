@@ -12,7 +12,11 @@ class Employee_model extends CI_model
 
 		$this->form_validation->set_rules('emp_name','Employee Name','alpha');
 		// $this->form_validation->set_rules('email_address','Email Address','valid_email');
-		$this->form_validation->set_rules('email_address', 'Email Address', 'trim|valid_email|is_unique[employee.email_address]');
+		if (isset($_POST['emp_id']) && $_POST['emp_id']!='') {
+			$this->form_validation->set_rules('email_address', 'Email Address', 'trim|valid_email');
+		}else{
+			$this->form_validation->set_rules('email_address', 'Email Address', 'trim|valid_email|is_unique[employee.email_address]');
+		}
 		$this->form_validation->set_rules('phone_no','Phone No','numeric|exact_length[10]');
 		if ($this->form_validation->run()) {
 			$data = array(
@@ -38,13 +42,15 @@ class Employee_model extends CI_model
 				redirect('employee');
 			}else{
 				$this->session->set_flashdata('error', 'Somthing went wrong. Try again with valid details !!');
-				redirect('employee/insert');
+				$this->session->set_flashdata('error', validation_errors());
+				// redirect('employee/insert');
 			}
 
 			
 		}else{
 			$this->session->set_flashdata('error', 'Somthing went wrong. Try again with valid details !!');
-			redirect('employee/insert');
+			$this->session->set_flashdata('error', validation_errors());
+			// redirect('employee/insert');
 		}
 	}
 	public function getsingleemployee($emp_id)

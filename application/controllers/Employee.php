@@ -39,7 +39,7 @@ class Employee extends CI_Controller {
 			}
 		}
 		$this->employee_model->insert_data();
-		redirect('employee');
+		// redirect('employee');
 		
 	}
 	public function edit($emp_id='')

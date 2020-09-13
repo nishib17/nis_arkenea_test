@@ -45,7 +45,7 @@ $( function() {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-			<h3>Employee Add</h3>
+			<h3>Employee Update</h3>
 			<hr>
 			<?php
 			if ($this->session->flashdata('success')) {?>
